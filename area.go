@@ -1,6 +1,12 @@
 package main
 
-import "github.com/umahmood/haversine"
+import (
+	"fmt"
+	"strings"
+
+	overpass "github.com/serjvanilla/go-overpass"
+	"github.com/umahmood/haversine"
+)
 
 // PointRect contains the 4 points used to calculate the area of a rectangle.
 type PointRect struct {
@@ -25,6 +31,47 @@ func CalculateArea(t PointRect) float64 {
 	distance2 := CalculateDistance(pt2, pt3)
 	area := distance1 * distance2
 	return area
+}
+
+// CalculateRoadArea in a PointRect.
+func CalculateRoadArea(t PointRect) float64 {
+	client := overpass.New()
+
+	query := buildQuery(t)
+
+	result, _ := client.Query(query)
+	sumArea := sumArea(result)
+	return sumArea
+}
+
+func sumArea(osmData overpass.Result) float64 {
+	for k, v := range osmData.Ways {
+		fmt.Printf("key[%v] value[%+v]\n", k, *v)
+	}
+
+	return 10.0
+}
+
+func buildQuery(t PointRect) string {
+	// (lat_min, lon_min, lat_max, lon_max)
+	var query strings.Builder
+
+	query.WriteString("[out:json][timeout:25];")
+	query.WriteString("(")
+	query.WriteString("node['highway']['highway'!='footway']")
+	query.WriteString("['highway'!='pedestrian']['-highway'!='path']")
+	fmt.Fprintf(&query, "(%f,%f,%f,%f);", t.South, t.West, t.North, t.East)
+	query.WriteString("way['highway']['highway'!='footway']")
+	query.WriteString("['highway'!='pedestrian']['-highway'!='path']")
+	fmt.Fprintf(&query, "(%f,%f,%f,%f);", t.South, t.West, t.North, t.East)
+	query.WriteString("relation['highway']['highway'!='footway']")
+	query.WriteString("['highway'!='pedestrian']['-highway'!='path']")
+	fmt.Fprintf(&query, "(%f,%f,%f,%f);", t.South, t.West, t.North, t.East)
+	query.WriteString(");")
+	query.WriteString("out body;")
+	query.WriteString(">;")
+	query.WriteString("out skel qt;")
+	return query.String()
 }
 
 // CalculateDistance between 2 points.

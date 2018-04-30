@@ -37,5 +37,22 @@ func AreaHandler(w http.ResponseWriter, r *http.Request) {
 
 // RoadAreaHandler sets up the API to handle Road Area requests.
 func RoadAreaHandler(w http.ResponseWriter, r *http.Request) {
+	decoder := json.NewDecoder(r.Body)
+
+	var t PointRect
+	err := decoder.Decode(&t)
+
+	if err != nil {
+		panic(err)
+	}
+
+	area := CalculateRoadArea(t)
+	js, err := json.Marshal(area)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(js)
 
 }
