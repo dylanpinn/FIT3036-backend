@@ -5,10 +5,10 @@ before_install:
   - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh  
   # - dep ensure
 install:
-  - go get -v github.com/codeclimate/test-reporter
-  - cd $GOPATH/src/github.com/codeclimate/test-reporter && 
-    git checkout tags/v0.4.3 && go install
-  - cd - && dep ensure -v -vendor-only
+  # - go get -v github.com/codeclimate/test-reporter
+  # - cd $GOPATH/src/github.com/codeclimate/test-reporter && 
+  #   git checkout tags/v0.4.3 && go install
+  # - cd - && dep ensure -v -vendor-only
 before_script:
   - test-reporter before-build
 script:
