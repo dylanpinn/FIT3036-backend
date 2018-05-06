@@ -3,15 +3,15 @@ go:
   - 1.10
 before_install:
   - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh  
-  # - dep ensure
+  - dep ensure
 install:
   # - go get -v github.com/codeclimate/test-reporter
   # - cd $GOPATH/src/github.com/codeclimate/test-reporter && 
   #   git checkout tags/v0.4.3 && go install
   # - cd - && dep ensure -v -vendor-only
-before_script:
-  - test-reporter before-build
-script:
-  - go test -coverprofile c.out
-after_script:
-  - test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+# before_script:
+#   - test-reporter before-build
+# script:
+#   - go test -coverprofile c.out
+# after_script:
+#   - test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
