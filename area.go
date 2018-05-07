@@ -8,6 +8,9 @@ import (
 	"github.com/umahmood/haversine"
 )
 
+// LaneWidth is the Default Lane width in Australia.
+const LaneWidth = 0.0035
+
 // PointRect contains the 4 points used to calculate the area of a rectangle.
 type PointRect struct {
 	North float64
@@ -45,11 +48,30 @@ func CalculateRoadArea(t PointRect) float64 {
 }
 
 func sumArea(osmData overpass.Result) float64 {
-	for k, v := range osmData.Ways {
-		fmt.Printf("key[%v] value[%+v]\n", k, *v)
+	total := 0.0
+	for _, v := range osmData.Ways {
+		total += calculateAreaOfWay(v)
 	}
 
-	return 10.0
+	return total
+}
+
+func calculateAreaOfWay(way *overpass.Way) float64 {
+	wayNodes := way.Nodes
+	distance := 0.0
+	noOfWays := len(wayNodes)
+	for k, v := range wayNodes {
+		if k != noOfWays-1 {
+			nextNode := wayNodes[k+1]
+			pt1 := Coordinate{v.Lat, v.Lon}
+			pt2 := Coordinate{nextNode.Lat, nextNode.Lon}
+			distance += CalculateDistance(pt1, pt2)
+		}
+	}
+
+	// TODO: Use supplied distance.
+	area := distance * LaneWidth * 2
+	return area
 }
 
 func buildQuery(t PointRect) string {
