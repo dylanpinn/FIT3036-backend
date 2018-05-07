@@ -7,7 +7,7 @@ before_install:
 install:
   - go get -v github.com/codeclimate/test-reporter
   - cd $GOPATH/src/github.com/codeclimate/test-reporter && 
-    git checkout tags/v0.4.3 && go install
+    git checkout tags/v0.4.3 && go install && cd -
 before_script:
   - test-reporter before-build
 script:
