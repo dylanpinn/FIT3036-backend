@@ -2,6 +2,16 @@
 
 
 [[projects]]
+  name = "github.com/aws/aws-lambda-go"
+  packages = [
+    "lambda",
+    "lambda/messages",
+    "lambdacontext"
+  ]
+  revision = "6e2e37798efbb1dfd8e9c6681702e683a6046517"
+  version = "v1.0.1"
+
+[[projects]]
   branch = "master"
   name = "github.com/serjvanilla/go-overpass"
   packages = ["."]
@@ -16,6 +26,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "b74ac5f05bf3b5d82f40be34b0034e8b3833232a10730216cc5da1a3401391a7"
+  inputs-digest = "977d97ed7896c5ed182f49c47ac02532f8838231669b7755bb45dff0e5baa5e4"
   solver-name = "gps-cdcl"
   solver-version = 1
