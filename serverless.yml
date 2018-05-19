@@ -18,7 +18,6 @@ functions:
     handler: bin/remote
     events: 
       - http:
-        path: remote
-        method: get
-      - cloudwatchLog: '/aws/lambda/fit3036/remote'
+          path: remote
+          method: get
 
