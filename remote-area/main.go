@@ -29,8 +29,6 @@ func handleRequest(ctx context.Context,
 	area := area.CalculateArea(*rect)
 	body, _ := json.Marshal(area)
 
-	fmt.Println(rect)
-
 	return events.APIGatewayProxyResponse{Body: string(body), StatusCode: 200}, nil
 }
 
