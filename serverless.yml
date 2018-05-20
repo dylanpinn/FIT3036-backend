@@ -8,16 +8,17 @@ provider:
   region: ap-southeast-2
 
 package:
- exclude:
-   - ./**
- include:
-   - ./bin/**
+  individually: true
+  exclude:
+    - ./**
 
 functions:
   area:
-    handler: bin/remote-area
+    handler: bin/remote/area
+    package:
+      include:
+        - ./bin/remote/area
     events: 
       - http:
           path: area
           method: post
-
