@@ -14,6 +14,15 @@
 
 [[projects]]
   branch = "master"
+  name = "github.com/fnproject/fdk-go"
+  packages = [
+    ".",
+    "utils"
+  ]
+  revision = "9ce8399e3ce789592e02fae77ee938627a97b407"
+
+[[projects]]
+  branch = "master"
   name = "github.com/serjvanilla/go-overpass"
   packages = ["."]
   revision = "345e5be5cf209f0ec63da60e7cf967c4cf736e36"
@@ -27,6 +36,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "641268b506281f0031588744a720ecc6a038928801471b33d013909faa019639"
+  inputs-digest = "00922896eba1bec13083356a796333fe22a9edb58dbbe6d309789850427a1841"
   solver-name = "gps-cdcl"
   solver-version = 1

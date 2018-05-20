@@ -3,7 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/dylanpinn/FIT3036-backend/area"
 
+	"encoding/json"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 )
@@ -19,7 +21,17 @@ func handleRequest(ctx context.Context,
 		fmt.Printf("    %s: %s\n", key, value)
 	}
 
-	return events.APIGatewayProxyResponse{Body: request.Body, StatusCode: 200}, nil
+	// Initialise rectangle
+	rect := &area.PointRect{}
+
+	// Parse request body
+	json.Unmarshal([]byte(request.Body), rect)
+	area := area.CalculateArea(*rect)
+	body, _ := json.Marshal(area)
+
+	fmt.Println(rect)
+
+	return events.APIGatewayProxyResponse{Body: string(body), StatusCode: 200}, nil
 }
 
 func main() {
