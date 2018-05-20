@@ -27,8 +27,8 @@ func AreaHandler(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	area := area.CalculateArea(t)
-	js, err := json.Marshal(area)
+	calcArea := area.CalculateArea(t)
+	js, err := json.Marshal(calcArea)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -48,8 +48,8 @@ func RoadAreaHandler(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	area := area.CalculateRoadArea(t)
-	js, err := json.Marshal(area)
+	calcArea := area.CalculateRoadArea(t)
+	js, err := json.Marshal(calcArea)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

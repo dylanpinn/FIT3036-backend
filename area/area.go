@@ -19,7 +19,7 @@ type PointRect struct {
 	West  float64
 }
 
-// Coordinate object containing lattitude and longtude.
+// Coordinate object containing latitude and longitude.
 type Coordinate struct {
 	lat  float64
 	long float64
@@ -98,8 +98,8 @@ func buildQuery(t PointRect) string {
 
 // CalculateDistance between 2 points.
 func CalculateDistance(pt1, pt2 Coordinate) float64 {
-	coord1 := haversine.Coord{Lat: pt1.lat, Lon: pt1.long}
-	coord2 := haversine.Coord{Lat: pt2.lat, Lon: pt2.long}
-	_, km := haversine.Distance(coord1, coord2)
+	coordinate1 := haversine.Coord{Lat: pt1.lat, Lon: pt1.long}
+	coordinate2 := haversine.Coord{Lat: pt2.lat, Lon: pt2.long}
+	_, km := haversine.Distance(coordinate1, coordinate2)
 	return km
 }
