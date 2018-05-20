@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"github.com/dylanpinn/FIT3036-backend/area"
 
 	"encoding/json"
@@ -12,14 +11,6 @@ import (
 
 func handleRequest(ctx context.Context,
 	request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	fmt.Printf("Processing request data for request %s.\n",
-		request.RequestContext.RequestID)
-	fmt.Printf("Body size = %d.\n", len(request.Body))
-
-	fmt.Println("Headers:")
-	for key, value := range request.Headers {
-		fmt.Printf("    %s: %s\n", key, value)
-	}
 
 	// Initialise rectangle
 	rect := &area.PointRect{}
