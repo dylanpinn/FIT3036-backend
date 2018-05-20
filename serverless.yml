@@ -1,0 +1,33 @@
+service:
+  name: fit3036
+
+provider:
+  name: aws
+  runtime: go1.x
+  # stage: dev
+  region: ap-southeast-2
+
+package:
+  individually: true
+  exclude:
+    - ./**
+
+functions:
+  area:
+    handler: bin/remote/area
+    package:
+      include:
+        - ./bin/remote/area
+    events: 
+      - http:
+          path: area
+          method: post
+  road:
+    handler: bin/remote/road
+    package:
+      include:
+        - ./bin/remote/road
+    events: 
+      - http:
+          path: roadArea
+          method: post

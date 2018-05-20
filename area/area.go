@@ -1,10 +1,10 @@
-package main
+package area
 
 import (
 	"fmt"
 	"strings"
 
-	overpass "github.com/serjvanilla/go-overpass"
+	"github.com/serjvanilla/go-overpass"
 	"github.com/umahmood/haversine"
 )
 

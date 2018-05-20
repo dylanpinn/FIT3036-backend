@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+
+	"github.com/dylanpinn/FIT3036-backend/area"
 )
 
 // our main function
@@ -18,14 +20,14 @@ func main() {
 func AreaHandler(w http.ResponseWriter, r *http.Request) {
 	decoder := json.NewDecoder(r.Body)
 
-	var t PointRect
+	var t area.PointRect
 	err := decoder.Decode(&t)
 
 	if err != nil {
 		panic(err)
 	}
 
-	area := CalculateArea(t)
+	area := area.CalculateArea(t)
 	js, err := json.Marshal(area)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -39,14 +41,14 @@ func AreaHandler(w http.ResponseWriter, r *http.Request) {
 func RoadAreaHandler(w http.ResponseWriter, r *http.Request) {
 	decoder := json.NewDecoder(r.Body)
 
-	var t PointRect
+	var t area.PointRect
 	err := decoder.Decode(&t)
 
 	if err != nil {
 		panic(err)
 	}
 
-	area := CalculateRoadArea(t)
+	area := area.CalculateRoadArea(t)
 	js, err := json.Marshal(area)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
