@@ -17,8 +17,8 @@ func handleRequest(ctx context.Context,
 
 	// Parse request body
 	json.Unmarshal([]byte(request.Body), rect)
-	area := area.CalculateArea(*rect)
-	body, _ := json.Marshal(area)
+	calcArea := area.CalculateArea(*rect)
+	body, _ := json.Marshal(calcArea)
 
 	return events.APIGatewayProxyResponse{Body: string(body), StatusCode: 200}, nil
 }
