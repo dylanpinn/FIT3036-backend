@@ -22,12 +22,12 @@ functions:
       - http:
           path: area
           method: post
-  roadArea:
+  road:
     handler: bin/remote/road
     package:
       include:
         - ./bin/remote/road
     events: 
       - http:
-          path: road
+          path: roadArea
           method: post
