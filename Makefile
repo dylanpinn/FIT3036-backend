@@ -3,6 +3,6 @@ build:
 	env GOOS=linux go build -ldflags="-s -w" -o bin/remote-area remote-area/main.go
 deploy:
 	make
-	npx serverless deploy
+	yarn serverless deploy
 remove:
-	npx serverless remove
+	yarn serverless remove

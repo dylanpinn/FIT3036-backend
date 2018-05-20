@@ -1,0 +1,22 @@
+{
+  "name": "fit3036-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dylanpinn/FIT3036-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dylanpinn/FIT3036-backend/issues"
+  },
+  "homepage": "https://github.com/dylanpinn/FIT3036-backend#readme",
+  "devDependencies": {
+    "serverless": "^1.27.2"
+  }
+}
