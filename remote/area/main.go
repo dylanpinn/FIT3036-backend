@@ -2,9 +2,11 @@ package main
 
 import (
 	"context"
+
 	"github.com/dylanpinn/FIT3036-backend/area"
 
 	"encoding/json"
+
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 )
