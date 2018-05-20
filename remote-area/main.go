@@ -20,7 +20,6 @@ func handleRequest(ctx context.Context,
 	}
 
 	return events.APIGatewayProxyResponse{Body: request.Body, StatusCode: 200}, nil
-
 }
 
 func main() {

@@ -15,9 +15,9 @@ package:
 
 functions:
   area:
-    handler: bin/remote
+    handler: bin/remote-area
     events: 
       - http:
-          path: remote
-          method: get
+          path: area
+          method: post
 
