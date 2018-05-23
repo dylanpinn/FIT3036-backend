@@ -115,6 +115,7 @@ func CalculateDistance(pt1, pt2 Coordinate) float64 {
 	return km
 }
 
+// IsPointInsideBounds checks if coor is between the rect.
 // check if lat is less than east and bigger than west
 // check if long is less than north and bigger than south
 func IsPointInsideBounds(coor Coordinate, rect PointRect) bool {
@@ -130,7 +131,6 @@ func IsPointInsideBounds(coor Coordinate, rect PointRect) bool {
 func InBetween(i, min, max float64) bool {
 	if (i >= min) && (i <= max) {
 		return true
-	} else {
-		return false
 	}
+	return false
 }
