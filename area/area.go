@@ -44,20 +44,20 @@ func CalculateRoadArea(t PointRect) float64 {
 	query := buildQuery(t)
 
 	result, _ := client.Query(query)
-	sumArea := sumArea(result)
+	sumArea := sumArea(result, t)
 	return sumArea
 }
 
-func sumArea(osmData overpass.Result) float64 {
+func sumArea(osmData overpass.Result, rect PointRect) float64 {
 	total := 0.0
 	for _, v := range osmData.Ways {
-		total += calculateAreaOfWay(v)
+		total += calculateAreaOfWay(v, rect)
 	}
 
 	return total
 }
 
-func calculateAreaOfWay(way *overpass.Way) float64 {
+func calculateAreaOfWay(way *overpass.Way, rect PointRect) float64 {
 	lanes := 2
 	noOfLanes := way.Meta.Tags["lanes"]
 	if l, err := strconv.Atoi(noOfLanes); err == nil {
@@ -70,8 +70,21 @@ func calculateAreaOfWay(way *overpass.Way) float64 {
 		if k != noOfWays-1 {
 			nextNode := wayNodes[k+1]
 			pt1 := Coordinate{v.Lat, v.Lon}
+			fmt.Println(IsPointInsideBounds(pt1, rect), pt1, rect)
+			if !IsPointInsideBounds(pt1, rect) {
+				fmt.Println("Outside", pt1)
+				continue
+			}
 			pt2 := Coordinate{nextNode.Lat, nextNode.Lon}
-			distance += CalculateDistance(pt1, pt2)
+			fmt.Println(IsPointInsideBounds(pt2, rect), pt2, rect)
+			if !IsPointInsideBounds(pt2, rect) {
+				fmt.Println("Outside", pt2)
+				continue
+			}
+			d := CalculateDistance(pt1, pt2)
+			// distance += CalculateDistance(pt1, pt2)
+			fmt.Println(d)
+			distance += d
 		}
 	}
 
@@ -108,4 +121,24 @@ func CalculateDistance(pt1, pt2 Coordinate) float64 {
 	coordinate2 := haversine.Coord{Lat: pt2.lat, Lon: pt2.long}
 	_, km := haversine.Distance(coordinate1, coordinate2)
 	return km
+}
+
+// check if lat is less than east and bigger than west
+// check if long is less than north and bigger than south
+func IsPointInsideBounds(coor Coordinate, rect PointRect) bool {
+	longBetween := InBetween(coor.long, rect.West, rect.East)
+	latBetween := InBetween(coor.lat, rect.South, rect.North)
+	if longBetween && latBetween {
+		return true
+	}
+	return false
+}
+
+// InBetween checks if float64 is between 2 others.
+func InBetween(i, min, max float64) bool {
+	if (i >= min) && (i <= max) {
+		return true
+	} else {
+		return false
+	}
 }
