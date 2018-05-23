@@ -2,13 +2,14 @@ package area
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 
 	"github.com/serjvanilla/go-overpass"
 	"github.com/umahmood/haversine"
 )
 
-// LaneWidth is the Default Lane width in Australia.
+// LaneWidth is the Default Lane width in Australia in km's.
 const LaneWidth = 0.0035
 
 // PointRect contains the 4 points used to calculate the area of a rectangle.
@@ -57,6 +58,11 @@ func sumArea(osmData overpass.Result) float64 {
 }
 
 func calculateAreaOfWay(way *overpass.Way) float64 {
+	lanes := 2
+	noOfLanes := way.Meta.Tags["lanes"]
+	if l, err := strconv.Atoi(noOfLanes); err == nil {
+		lanes = l * 2
+	}
 	wayNodes := way.Nodes
 	distance := 0.0
 	noOfWays := len(wayNodes)
@@ -69,8 +75,8 @@ func calculateAreaOfWay(way *overpass.Way) float64 {
 		}
 	}
 
-	// TODO: Use supplied distance.
-	area := distance * LaneWidth * 2
+	fmt.Println(distance, LaneWidth, lanes)
+	area := distance * LaneWidth * float64(lanes)
 	return area
 }
 
@@ -96,7 +102,7 @@ func buildQuery(t PointRect) string {
 	return query.String()
 }
 
-// CalculateDistance between 2 points.
+// CalculateDistance returns km's between 2 points.
 func CalculateDistance(pt1, pt2 Coordinate) float64 {
 	coordinate1 := haversine.Coord{Lat: pt1.lat, Lon: pt1.long}
 	coordinate2 := haversine.Coord{Lat: pt2.lat, Lon: pt2.long}
