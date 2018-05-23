@@ -9,8 +9,8 @@
     "lambda/messages",
     "lambdacontext"
   ]
-  revision = "6e2e37798efbb1dfd8e9c6681702e683a6046517"
-  version = "v1.0.1"
+  revision = "4d30d0ff60440c2d0480a15747c96ee71c3c53d4"
+  version = "v1.2.0"
 
 [[projects]]
   branch = "master"
@@ -19,7 +19,7 @@
     ".",
     "utils"
   ]
-  revision = "9ce8399e3ce789592e02fae77ee938627a97b407"
+  revision = "1eb29530716f262bad5b83eb9a5b3f7483636949"
 
 [[projects]]
   branch = "master"
