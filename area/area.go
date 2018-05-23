@@ -70,25 +70,17 @@ func calculateAreaOfWay(way *overpass.Way, rect PointRect) float64 {
 		if k != noOfWays-1 {
 			nextNode := wayNodes[k+1]
 			pt1 := Coordinate{v.Lat, v.Lon}
-			fmt.Println(IsPointInsideBounds(pt1, rect), pt1, rect)
 			if !IsPointInsideBounds(pt1, rect) {
-				fmt.Println("Outside", pt1)
 				continue
 			}
 			pt2 := Coordinate{nextNode.Lat, nextNode.Lon}
-			fmt.Println(IsPointInsideBounds(pt2, rect), pt2, rect)
 			if !IsPointInsideBounds(pt2, rect) {
-				fmt.Println("Outside", pt2)
 				continue
 			}
-			d := CalculateDistance(pt1, pt2)
-			// distance += CalculateDistance(pt1, pt2)
-			fmt.Println(d)
-			distance += d
+			distance += CalculateDistance(pt1, pt2)
 		}
 	}
 
-	fmt.Println(distance, LaneWidth, lanes)
 	area := distance * LaneWidth * float64(lanes)
 	return area
 }
