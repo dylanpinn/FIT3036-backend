@@ -11,6 +11,8 @@ import (
 	"github.com/aws/aws-lambda-go/lambda"
 )
 
+var headers map[string]string
+
 func handleRequest(ctx context.Context,
 	request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
@@ -22,7 +24,10 @@ func handleRequest(ctx context.Context,
 	calcArea := area.CalculateArea(*rect)
 	body, _ := json.Marshal(calcArea)
 
-	return events.APIGatewayProxyResponse{Body: string(body), StatusCode: 200}, nil
+	headers = make(map[string]string)
+	headers["Access-Control-Allow-Origin"] = "*"
+	return events.APIGatewayProxyResponse{Body: string(body), StatusCode: 200,
+		Headers: headers}, nil
 }
 
 func main() {

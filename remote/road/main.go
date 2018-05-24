@@ -9,6 +9,8 @@ import (
 	"github.com/dylanpinn/FIT3036-backend/area"
 )
 
+var headers map[string]string
+
 func handleRequest(ctx context.Context,
 	request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
@@ -20,7 +22,10 @@ func handleRequest(ctx context.Context,
 	calcArea := area.CalculateRoadArea(*rect)
 	body, _ := json.Marshal(calcArea)
 
-	return events.APIGatewayProxyResponse{Body: string(body), StatusCode: 200}, nil
+	headers = make(map[string]string)
+	headers["Access-Control-Allow-Origin"] = "*"
+	return events.APIGatewayProxyResponse{Body: string(body), StatusCode: 200,
+		Headers: headers}, nil
 }
 
 func main() {
