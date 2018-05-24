@@ -22,6 +22,7 @@ functions:
       - http:
           path: area
           method: post
+          cors: true
   road:
     handler: bin/remote/road
     package:
@@ -31,3 +32,4 @@ functions:
       - http:
           path: roadArea
           method: post
+          cors: true
