@@ -18,7 +18,7 @@ functions:
     package:
       include:
         - ./bin/remote/area
-    events: 
+    events:
       - http:
           path: area
           method: post
@@ -28,7 +28,7 @@ functions:
     package:
       include:
         - ./bin/remote/road
-    events: 
+    events:
       - http:
           path: roadArea
           method: post
