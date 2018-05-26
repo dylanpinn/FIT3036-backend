@@ -1,5 +1,8 @@
 # FIT3036 - Backend API
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/e93c83eb780cf2a1b94a/maintainability)](https://codeclimate.com/github/dylanpinn/FIT3036-backend/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/e93c83eb780cf2a1b94a/test_coverage)](https://codeclimate.com/github/dylanpinn/FIT3036-backend/test_coverage)
+
 ## Overview
 
 This repo contains the backend API for my road surface area calculator.
