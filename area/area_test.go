@@ -65,3 +65,13 @@ func TestCalculateArea(t *testing.T) {
 		t.Errorf("Area was incorrect, got: %f, want: %f.", area, expectedArea)
 	}
 }
+
+func TestCalculateRoadArea(t *testing.T) {
+	rect := PointRect{North: -37.9072244235794, South: -37.9162075764206, East: 145.13289004553383, West: 145.12150395446622}
+	area := CalculateRoadArea(rect)
+	const expectedArea = 0.19777044148142264
+
+	if diff := math.Abs(area - expectedArea); diff > TOLERANCE {
+		t.Errorf("Area was incorrect, got: %f, want: %f.", area, expectedArea)
+	}
+}
