@@ -5,7 +5,30 @@
 
 ## Overview
 
-This repo contains the backend API for my road surface area calculator.
+This repo contains the backend API for my road surface area calculator. It is
+split up into 3 packages.
+
+* Area
+  * Shared functionality.
+  * Calculate Distance.
+  * Calculate Area.
+  * Calculate Surface Area of Roads within Area.
+* Local
+  * Local server runs on port 8080.
+  * Accessed via http://localhost:8080
+    * `POST /area`
+      * Calculate area of a rectangle.
+      * Post body:
+        * `north: float64, south: float64, east: float64, west: float64`
+    * `POST /road`
+      * Calculate surface area of roads within a rectangle.
+      * Post body:
+        * `north: float64, south: float64, east: float64, west: float64`
+* Remote
+  * `area`
+    * AWS Lambda implementation of the local function.
+  * `road`
+    * AWS Lambda implementation of the local function.
 
 ## Requirements
 
