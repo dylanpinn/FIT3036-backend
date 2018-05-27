@@ -48,6 +48,7 @@ func CalculateRoadArea(t PointRect) float64 {
 	return sumArea
 }
 
+// Sum the area of the roads.
 func sumArea(osmData overpass.Result, rect PointRect) float64 {
 	total := 0.0
 	for _, v := range osmData.Ways {
@@ -57,8 +58,10 @@ func sumArea(osmData overpass.Result, rect PointRect) float64 {
 	return total
 }
 
+// Calculate the Area of a Road (way).
 func calculateAreaOfWay(way *overpass.Way, rect PointRect) float64 {
 	lanes := 2
+	// Get lane information from API response.
 	noOfLanes := way.Meta.Tags["lanes"]
 	if l, err := strconv.Atoi(noOfLanes); err == nil {
 		lanes = l * 2
@@ -85,6 +88,7 @@ func calculateAreaOfWay(way *overpass.Way, rect PointRect) float64 {
 	return area
 }
 
+// Build the OverPass API query.
 func buildQuery(t PointRect) string {
 	// (lat_min, lon_min, lat_max, lon_max)
 	var query strings.Builder

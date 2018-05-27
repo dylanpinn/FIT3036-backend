@@ -8,7 +8,7 @@ import (
 	"github.com/dylanpinn/FIT3036-backend/area"
 )
 
-// our main function
+// our main function which sets up the route handlers.
 func main() {
 	fmt.Println("Listening on port 8080")
 	http.HandleFunc("/area", AreaHandler)
