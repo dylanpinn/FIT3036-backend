@@ -11,7 +11,8 @@ import (
 
 var headers map[string]string
 
-func handleRequest(ctx context.Context,
+// HandleRequest handles the Road Area API request and reponse.
+func HandleRequest(ctx context.Context,
 	request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
 	// Initialise rectangle
@@ -29,5 +30,5 @@ func handleRequest(ctx context.Context,
 }
 
 func main() {
-	lambda.Start(handleRequest)
+	lambda.Start(HandleRequest)
 }
