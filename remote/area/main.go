@@ -13,6 +13,7 @@ import (
 
 var headers map[string]string
 
+// HandleRequest handles the Area API request and reponse.
 func HandleRequest(ctx context.Context,
 	request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
